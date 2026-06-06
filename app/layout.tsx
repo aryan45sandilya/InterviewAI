@@ -80,27 +80,31 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning className={`${inter.variable} ${poppins.variable}`}>
-        <body className="font-sans antialiased bg-mesh-gradient">
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange={false}
-          >
-            {children}
-            <Toaster 
-              richColors 
-              position="top-right" 
-              toastOptions={{
-                className: "glass-card",
-              }}
-            />
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
+  const content = (
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${poppins.variable}`}>
+      <body className="font-sans antialiased bg-mesh-gradient">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          {children}
+          <Toaster
+            richColors
+            position="top-right"
+            toastOptions={{
+              className: "glass-card",
+            }}
+          />
+        </ThemeProvider>
+      </body>
+    </html>
   );
+
+  if (!publishableKey) return content;
+
+  return <ClerkProvider publishableKey={publishableKey}>{content}</ClerkProvider>;
 }
