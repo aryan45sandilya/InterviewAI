@@ -36,12 +36,13 @@ export default async function InterviewsPage({
     <div className="container py-8 space-y-6 animate-fade-in">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold">My Interviews</h1>
-          <p className="text-muted-foreground mt-1">{allInterviews.length} interviews total</p>
+          <p className="label-sm mb-1.5">Interviews</p>
+          <h1 className="text-2xl font-extrabold tracking-tight">My Interviews</h1>
+          <p className="text-sm text-muted-foreground mt-1">{allInterviews.length} total</p>
         </div>
         <Link href="/interviews/new">
-          <Button variant="gradient" className="gap-2">
-            <PlusCircle className="h-4 w-4" /> New Interview
+          <Button size="sm" className="gap-1.5">
+            <PlusCircle className="h-3.5 w-3.5" /> New Interview
           </Button>
         </Link>
       </div>
@@ -55,8 +56,8 @@ export default async function InterviewsPage({
             {allInterviews.length > 0 ? "Try changing the filters" : "Create your first interview to get started"}
           </p>
           <Link href="/interviews/new">
-            <Button variant="gradient" className="gap-2">
-              <PlusCircle className="h-4 w-4" /> Create Interview
+            <Button size="sm" className="gap-1.5">
+              <PlusCircle className="h-3.5 w-3.5" /> Create Interview
             </Button>
           </Link>
         </div>

@@ -1,52 +1,39 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Toaster } from "sonner";
 import "./globals.css";
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-jakarta",
   display: "swap",
-});
-
-const poppins = Poppins({
-  weight: ["400", "500", "600", "700", "800", "900"],
-  subsets: ["latin"],
-  variable: "--font-poppins",
-  display: "swap",
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "InterviewAI - AI-Powered Mock Interview Platform",
+    default: "InterviewAI — AI Mock Interview Platform",
     template: "%s | InterviewAI",
   },
   description:
-    "Prepare for your dream job with AI-powered mock interviews, real-time feedback, emotion analysis, and comprehensive performance reports.",
+    "Practice technical and behavioral interviews with AI. Get real-time feedback, emotion analysis, and personalized improvement plans.",
   keywords: [
     "mock interview",
     "AI interview",
     "interview preparation",
     "technical interview",
-    "job interview practice",
     "coding interview",
-    "FAANG interview",
   ],
-  authors: [{ name: "InterviewAI" }],
+  authors: [{ name: "Aryan Sandilya" }],
   creator: "InterviewAI",
   openGraph: {
     type: "website",
     locale: "en_US",
-    title: "InterviewAI - AI-Powered Mock Interview Platform",
-    description: "Prepare for your dream job with AI-powered mock interviews",
+    title: "InterviewAI — AI Mock Interview Platform",
+    description: "Practice interviews with AI. Get real-time feedback.",
     siteName: "InterviewAI",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "InterviewAI",
-    description: "AI-Powered Mock Interview Platform",
   },
   robots: {
     index: true,
@@ -57,9 +44,7 @@ export const metadata: Metadata = {
       { url: "/favicon.svg", type: "image/svg+xml" },
       { url: "/icon", type: "image/png", sizes: "32x32" },
     ],
-    apple: [
-      { url: "/apple-icon", type: "image/png", sizes: "180x180" },
-    ],
+    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
     shortcut: "/favicon.svg",
   },
   manifest: "/manifest.json",
@@ -67,27 +52,23 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#0f0f1a" },
+    { media: "(prefers-color-scheme: light)", color: "#faf9f6" },
+    { media: "(prefers-color-scheme: dark)", color: "#100f0e" },
   ],
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
   const content = (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${poppins.variable}`}>
-      <body className="font-sans antialiased bg-mesh-gradient">
+    <html lang="en" suppressHydrationWarning className={plusJakartaSans.variable}>
+      <body className="font-sans antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange={false}
         >
@@ -96,7 +77,11 @@ export default function RootLayout({
             richColors
             position="top-right"
             toastOptions={{
-              className: "glass-card",
+              style: {
+                background: "hsl(var(--card))",
+                border: "1px solid hsl(var(--border))",
+                color: "hsl(var(--card-foreground))",
+              },
             }}
           />
         </ThemeProvider>
@@ -105,6 +90,5 @@ export default function RootLayout({
   );
 
   if (!publishableKey) return content;
-
   return <ClerkProvider publishableKey={publishableKey}>{content}</ClerkProvider>;
 }

@@ -294,25 +294,25 @@ export function InterviewRoom({ interview, questions }: { interview: Interview; 
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-purple-50/10 dark:via-purple-950/5 to-background">
+    <div className="min-h-screen bg-background">
       <FaceGuard videoRef={videoRef} enabled={cameraOn} onAutoEnd={handleAutoEnd} />
 
       {/* Top bar */}
-      <div className="sticky top-0 z-40 glass-morphism shadow-lg">
-        <div className="container flex items-center justify-between gap-4 max-w-7xl py-3 md:py-4">
+      <div className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur-sm">
+        <div className="container flex items-center justify-between gap-4 max-w-7xl py-3 md:py-3.5">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="p-2 rounded-xl gradient-primary shadow-lg">
-              <Brain className="h-5 w-5 text-white" />
+            <div className="p-1.5 rounded bg-primary">
+              <Brain className="h-4 w-4 text-primary-foreground" />
             </div>
             <div className="min-w-0">
-              <p className="font-bold text-sm md:text-base truncate">{interview.title}</p>
+              <p className="font-semibold text-sm truncate">{interview.title}</p>
               <p className="text-xs text-muted-foreground">Question {currentIdx + 1} of {questions.length}</p>
             </div>
           </div>
           <div className="flex items-center gap-3 md:gap-4">
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl glass-card">
-              <Clock className="h-4 w-4 text-purple-500" />
-              <span className="text-sm font-mono font-bold">{formatDuration(elapsed)}</span>
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded border border-border bg-secondary/50">
+              <Clock className="h-3.5 w-3.5 text-muted-foreground" />
+              <span className="text-sm font-mono font-semibold tabular-nums">{formatDuration(elapsed)}</span>
             </div>
             {isRecording && (
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-red-500/10 border border-red-500/30">
@@ -323,7 +323,7 @@ export function InterviewRoom({ interview, questions }: { interview: Interview; 
           </div>
         </div>
         <div className="container max-w-7xl px-4">
-          <Progress value={progress} className="h-2 [&>div]:gradient-primary shadow-sm" />
+          <Progress value={progress} className="h-1 rounded-none" />
         </div>
       </div>
 
@@ -340,17 +340,17 @@ export function InterviewRoom({ interview, questions }: { interview: Interview; 
             />
           </div>
 
-          <Card className="glass-card shadow-xl animate-slide-up" style={{ animationDelay: '0.1s' }}>
+          <Card className="border-border animate-slide-up" style={{ animationDelay: '0.1s' }}>
             <CardHeader className="pb-4">
               <div className="flex items-center gap-2 flex-wrap">
                 <Badge className={cn("text-xs font-bold", getDifficultyColor(currentQuestion.difficulty))} variant="outline">
                   {currentQuestion.difficulty}
                 </Badge>
-                <Badge variant="secondary" className="text-xs capitalize font-semibold glass-card">
+                <Badge variant="secondary" className="text-xs capitalize font-medium">
                   {currentQuestion.questionType.replace("_", " ")}
                 </Badge>
                 {currentQuestion.hints && currentQuestion.hints.length > 0 && (
-                  <Button variant="ghost" size="sm" className="h-7 text-xs ml-auto btn-hover"
+                  <Button variant="ghost" size="sm" className="h-7 text-xs ml-auto"
                     onClick={() => setShowHint(!showHint)}>
                     💡 {showHint ? "Hide" : "Hint"}
                   </Button>
@@ -419,12 +419,11 @@ export function InterviewRoom({ interview, questions }: { interview: Interview; 
 
           <div className="flex items-center justify-between gap-4">
             <Button variant="outline" onClick={() => setCurrentIdx((i) => i - 1)}
-              disabled={currentIdx === 0} className="gap-2 btn-hover glass-card">
+              disabled={currentIdx === 0} className="gap-2">
               <ChevronLeft className="h-4 w-4" /> Previous
             </Button>
             <Button onClick={goToNext} disabled={submitting || completing}
-              variant={isLastQuestion ? "gradient" : "default"} 
-              className={cn("gap-2 btn-hover shadow-lg", isLastQuestion && "shadow-purple-500/30")}>
+              className="gap-2">
               {completing ? (
                 <>
                   <div className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
@@ -450,8 +449,8 @@ export function InterviewRoom({ interview, questions }: { interview: Interview; 
 
         {/* Right */}
         <div className="space-y-4 md:space-y-6">
-          <Card className="overflow-hidden glass-card shadow-2xl animate-slide-in-right">
-            <div className="relative bg-gradient-to-br from-slate-900 to-slate-800 aspect-video">
+          <Card className="overflow-hidden border-border">
+            <div className="relative bg-secondary aspect-video">
               {/* Always in DOM so srcObject assignment works */}
               <video
                 ref={videoRef}
@@ -464,17 +463,17 @@ export function InterviewRoom({ interview, questions }: { interview: Interview; 
                 )}
               />
               {!cameraOn && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-900/50 to-indigo-900/50 backdrop-blur-sm">
+                <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <VideoOff className="h-12 w-12 text-slate-400 mx-auto mb-2" />
-                    <p className="text-xs text-slate-400">Camera Off</p>
+                    <VideoOff className="h-10 w-10 text-muted-foreground/40 mx-auto mb-2" />
+                    <p className="text-xs text-muted-foreground">Camera off</p>
                   </div>
                 </div>
               )}
               {cameraOn && <EmotionOverlay videoRef={videoRef} interviewId={interview.id} />}
             </div>
-            <div className="p-4 bg-card/50 backdrop-blur-sm border-t flex items-center justify-center gap-4">
-              <Button variant={micOn ? "secondary" : "outline"} size="icon" className="btn-hover h-12 w-12 rounded-xl"
+            <div className="p-4 border-t border-border flex items-center justify-center gap-4">
+              <Button variant={micOn ? "secondary" : "outline"} size="icon" className="h-10 w-10"
                 onClick={() => {
                   if (streamRef.current) {
                     streamRef.current.getAudioTracks().forEach((t) => (t.enabled = !micOn));
@@ -483,15 +482,15 @@ export function InterviewRoom({ interview, questions }: { interview: Interview; 
                 }}>
                 {micOn ? <Mic className="h-5 w-5 text-green-500" /> : <MicOff className="h-5 w-5 text-red-500" />}
               </Button>
-              <Button variant={cameraOn ? "secondary" : "outline"} size="icon" className="btn-hover h-12 w-12 rounded-xl"
+              <Button variant={cameraOn ? "secondary" : "outline"} size="icon" className="h-10 w-10"
                 onClick={cameraOn ? stopCamera : startCamera}>
                 {cameraOn ? <Video className="h-5 w-5 text-green-500" /> : <VideoOff className="h-5 w-5 text-red-500" />}
               </Button>
             </div>
           </Card>
 
-          <Card className="p-5 flex flex-col items-center gap-3 glass-card shadow-lg animate-fade-in" style={{ animationDelay: '0.2s' }}>
-            <p className="text-sm font-bold gradient-text">
+          <Card className="p-5 flex flex-col items-center gap-3 border-border" style={{ animationDelay: '0.2s' }}>
+            <p className="text-sm font-semibold">
               {timerActive ? "⏱️ Answer Time Remaining" : aiDone ? "✅ Timer Done" : "⏳ Waiting for AI..."}
             </p>
             <AnswerTimer key={timerKey} durationSeconds={60} active={timerActive} onTimeUp={handleTimeUp} />
@@ -500,7 +499,7 @@ export function InterviewRoom({ interview, questions }: { interview: Interview; 
             )}
           </Card>
 
-          <Card className="glass-card shadow-lg animate-fade-in" style={{ animationDelay: '0.3s' }}>
+          <Card className="border-border" style={{ animationDelay: '0.3s' }}>
             <CardHeader className="pb-3"><CardTitle className="text-sm font-bold">Questions Overview</CardTitle></CardHeader>
             <CardContent>
               <div className="grid grid-cols-5 gap-2">
@@ -509,12 +508,12 @@ export function InterviewRoom({ interview, questions }: { interview: Interview; 
                   return (
                     <button key={q.id} onClick={() => setCurrentIdx(i)}
                       className={cn(
-                        "h-10 w-full rounded-xl text-sm font-bold border-2 transition-all duration-300",
-                        i === currentIdx 
-                          ? "gradient-primary text-white border-purple-500 shadow-lg shadow-purple-500/30 scale-110"
-                          : answered 
-                            ? "bg-green-500/20 border-green-500/50 text-green-700 dark:text-green-400 hover:scale-105"
-                            : "bg-muted border-border hover:border-purple-500/50 hover:scale-105"
+                        "h-9 w-full rounded text-sm font-semibold border transition-colors duration-150",
+                        i === currentIdx
+                          ? "bg-primary text-primary-foreground border-primary"
+                          : answered
+                            ? "bg-green-500/15 border-green-500/40 text-green-700 dark:text-green-400 hover:bg-green-500/20"
+                            : "bg-secondary border-border hover:border-primary/40 text-muted-foreground hover:text-foreground"
                       )}>
                       {i + 1}
                     </button>
@@ -527,26 +526,24 @@ export function InterviewRoom({ interview, questions }: { interview: Interview; 
             </CardContent>
           </Card>
 
-          <Card className="gradient-primary text-white shadow-xl animate-fade-in" style={{ animationDelay: '0.4s' }}>
-            <CardContent className="p-5">
-              <p className="text-xs font-bold mb-3 flex items-center gap-2">
-                💡 Quick Tips
-              </p>
-              <ul className="text-xs space-y-2">
+          <Card className="border-border" style={{ animationDelay: '0.4s' }}>
+            <CardContent className="p-4">
+              <p className="label-sm mb-3">Quick tips</p>
+              <ul className="text-xs space-y-2 text-muted-foreground">
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-300">•</span>
+                  <span className="text-primary mt-0.5">•</span>
                   <span>Click &quot;Hear Question&quot; — AI reads it aloud</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-300">•</span>
+                  <span className="text-primary mt-0.5">•</span>
                   <span>60 seconds to answer after AI finishes</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-300">•</span>
+                  <span className="text-primary mt-0.5">•</span>
                   <span>Voice records automatically — or type</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-yellow-300">•</span>
+                  <span className="text-primary mt-0.5">•</span>
                   <span>3 face warnings = interview ends</span>
                 </li>
               </ul>

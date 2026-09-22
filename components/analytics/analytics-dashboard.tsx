@@ -30,7 +30,7 @@ interface Report {
   createdAt: Date;
 }
 
-const COLORS = ["#3b82f6", "#8b5cf6", "#10b981", "#f59e0b", "#ef4444", "#06b6d4"];
+const COLORS = ["#e87318", "#3b82f6", "#10b981", "#f59e0b", "#ef4444", "#8b5cf6"];
 
 export function AnalyticsDashboard({
   interviews,

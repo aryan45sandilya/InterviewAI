@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -8,26 +10,31 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
+        default:
+          "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
         destructive:
           "bg-destructive text-destructive-foreground hover:bg-destructive/90 shadow-sm",
         outline:
-          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+          "border border-input bg-background hover:bg-secondary hover:text-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/70",
+        ghost:
+          "hover:bg-secondary hover:text-foreground",
+        link:
+          "text-primary underline-offset-4 hover:underline",
         gradient:
-          "bg-gradient-to-r from-purple-600 via-violet-600 to-indigo-600 text-white hover:from-purple-700 hover:via-violet-700 hover:to-indigo-700 shadow-lg shadow-purple-500/25 border-0",
-        info: "bg-blue-500 text-white hover:bg-blue-600 shadow-sm",
-        success: "bg-green-500 text-white hover:bg-green-600 shadow-sm",
+          "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm",
+        info:
+          "bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 hover:bg-blue-500/20",
+        success:
+          "bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20 hover:bg-green-500/20",
       },
       size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
         lg: "h-11 rounded-md px-8",
         xl: "h-12 rounded-md px-10 text-base",
-        icon: "h-10 w-10",
+        icon: "h-9 w-9",
       },
     },
     defaultVariants: {

@@ -14,8 +14,9 @@ export default async function SettingsPage() {
   return (
     <div className="container py-8 max-w-3xl space-y-8 animate-fade-in">
       <div>
-        <h1 className="text-3xl font-bold">Settings</h1>
-        <p className="text-muted-foreground mt-1">Manage your account and preferences</p>
+        <p className="label-sm mb-1.5">Settings</p>
+        <h1 className="text-2xl font-extrabold tracking-tight">Account & Preferences</h1>
+        <p className="text-sm text-muted-foreground mt-1">Manage your account settings</p>
       </div>
 
       {/* Appearance */}

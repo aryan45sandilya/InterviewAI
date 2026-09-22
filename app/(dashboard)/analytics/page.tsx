@@ -25,8 +25,9 @@ export default async function AnalyticsPage() {
   return (
     <div className="container py-8 space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-3xl font-bold">Analytics</h1>
-        <p className="text-muted-foreground mt-1">Track your interview performance over time</p>
+        <p className="label-sm mb-1.5">Analytics</p>
+        <h1 className="text-2xl font-extrabold tracking-tight">Performance Overview</h1>
+        <p className="text-sm text-muted-foreground mt-1">Track your interview performance over time</p>
       </div>
       <AnalyticsDashboard interviews={completedInterviews} reports={reports} />
     </div>

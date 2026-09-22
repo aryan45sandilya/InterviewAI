@@ -36,17 +36,12 @@ export function CountdownScreen({ interviewTitle, totalQuestions, onComplete }: 
 
   return (
     <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
-        <div className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-purple-600/10 blur-3xl" />
-      </div>
-
       <div className="relative flex flex-col items-center gap-8 text-center px-6 max-w-md">
-        <div className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-600">
-            <Brain className="h-6 w-6 text-white" />
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-8 w-8 items-center justify-center rounded bg-primary">
+            <Brain className="h-4.5 w-4.5 text-primary-foreground" />
           </div>
-          <span className="text-xl font-bold gradient-text">InterviewAI</span>
+          <span className="font-bold text-base">InterviewAI</span>
         </div>
 
         <div>

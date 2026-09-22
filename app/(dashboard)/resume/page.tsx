@@ -20,8 +20,9 @@ export default async function ResumePage() {
   return (
     <div className="container py-8 max-w-4xl space-y-6 animate-fade-in">
       <div>
-        <h1 className="text-3xl font-bold">Resume Manager</h1>
-        <p className="text-muted-foreground mt-1">
+        <p className="label-sm mb-1.5">Tools</p>
+        <h1 className="text-2xl font-extrabold tracking-tight">Resume Manager</h1>
+        <p className="text-sm text-muted-foreground mt-1">
           Upload your resume to get personalized interview questions based on your experience.
         </p>
       </div>

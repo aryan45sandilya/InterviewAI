@@ -87,17 +87,17 @@ export function InterviewReportView({ interview, report, questionsWithAnswers }:
   if (!report) {
     return (
       <div className="container py-20 text-center max-w-lg">
-        <div className="glass-card p-12 rounded-3xl shadow-2xl animate-pulse-slow">
-          <div className="flex h-20 w-20 items-center justify-center rounded-3xl gradient-primary mx-auto mb-6 shadow-2xl shadow-purple-500/40">
-            <div className="h-10 w-10 rounded-full border-4 border-white/30 border-t-white animate-spin" />
+        <div className="border border-border rounded-lg p-12 bg-card text-center">
+          <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-primary/10 mx-auto mb-6">
+            <div className="h-6 w-6 rounded-full border-2 border-primary/30 border-t-primary animate-spin" />
           </div>
-          <h2 className="text-2xl font-black mb-3 gradient-text">Generating Your Report</h2>
-          <p className="text-muted-foreground mb-3 text-sm leading-relaxed">
-            AI is analyzing your answers with advanced algorithms. This takes 15–30 seconds.
+          <h2 className="text-xl font-bold mb-3">Generating your report…</h2>
+          <p className="text-muted-foreground text-sm leading-relaxed mb-3">
+            AI is analyzing your answers. This takes 15–30 seconds.
           </p>
           <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-            <div className="h-1.5 w-1.5 rounded-full bg-purple-500 animate-pulse" />
-            <span>Page will refresh automatically...</span>
+            <span className="h-1.5 w-1.5 rounded-full bg-primary inline-block animate-pulse" />
+            <span>Page refreshes automatically</span>
           </div>
         </div>
         <AutoRefresh />
@@ -111,38 +111,35 @@ export function InterviewReportView({ interview, report, questionsWithAnswers }:
       <div className="flex items-center justify-between gap-4 animate-fade-in">
         <div className="flex items-center gap-4">
           <Link href="/interviews">
-            <Button variant="outline" size="icon" className="btn-hover glass-card rounded-xl h-10 w-10">
-              <ArrowLeft className="h-5 w-5" />
+            <Button variant="outline" size="icon" className="h-9 w-9">
+              <ArrowLeft className="h-4 w-4" />
             </Button>
           </Link>
           <div>
-            <h1 className="text-2xl md:text-3xl font-black gradient-text">{interview.title}</h1>
+            <h1 className="text-xl md:text-2xl font-extrabold tracking-tight">{interview.title}</h1>
             <p className="text-muted-foreground text-sm mt-1">
               {interview.role} • {formatDate(interview.completedAt || interview.createdAt)}
             </p>
           </div>
         </div>
         <div className="flex gap-2">
-          <Button variant="outline" size="sm" className="gap-2 btn-hover glass-card" onClick={() => window.print()}>
+          <Button variant="outline" size="sm" className="gap-2" onClick={() => window.print()}>
             <Download className="h-4 w-4" /> Export
           </Button>
         </div>
       </div>
 
       {/* Overall Score Hero */}
-      <Card className="glass-card border-2 border-purple-500/20 shadow-2xl overflow-hidden relative animate-slide-up">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-indigo-600/10 to-cyan-600/10" />
-        <CardContent className="pt-10 pb-10 relative">
+      <Card className="border-border animate-slide-up">
+        <CardContent className="pt-8 pb-8">
           <div className="flex flex-col md:flex-row items-center gap-10">
-            <div className="text-center">
-              <div className="relative flex h-36 w-36 md:h-40 md:w-40 items-center justify-center rounded-3xl border-4 border-purple-500/30 gradient-primary shadow-2xl shadow-purple-500/40 mx-auto group">
-                <Trophy className={cn("h-12 w-12 md:h-14 md:w-14 text-white group-hover:scale-110 transition-transform")} />
-                <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 rounded-xl glass-card shadow-lg">
-                  <span className={cn("text-4xl md:text-5xl font-black gradient-text")}>{Math.round(overallScore)}</span>
-                </div>
+            <div className="text-center shrink-0">
+              <div className="flex h-28 w-28 items-center justify-center rounded-xl bg-primary/10 border border-primary/20 mx-auto mb-3">
+                <Trophy className="h-10 w-10 text-primary" />
               </div>
-              <p className={cn("font-black text-xl md:text-2xl mt-10", scoreLabel.color)}>{scoreLabel.label}</p>
-              <p className="text-sm text-muted-foreground font-semibold">Overall Score</p>
+              <p className="text-5xl font-extrabold tabular-nums tracking-tight">{Math.round(overallScore)}</p>
+              <p className={cn("font-semibold text-base mt-1", scoreLabel.color)}>{scoreLabel.label}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">Overall score</p>
             </div>
             <div className="flex-1 space-y-4 w-full">
               {scoreCategories.map((cat, i) => (
@@ -158,10 +155,10 @@ export function InterviewReportView({ interview, report, questionsWithAnswers }:
                   <Progress
                     value={cat.value}
                     className={cn(
-                      "h-3 shadow-inner",
-                      cat.value >= 70 ? "[&>div]:bg-gradient-to-r [&>div]:from-green-500 [&>div]:to-emerald-500" :
-                        cat.value >= 50 ? "[&>div]:bg-gradient-to-r [&>div]:from-yellow-500 [&>div]:to-orange-500" :
-                          "[&>div]:bg-gradient-to-r [&>div]:from-red-500 [&>div]:to-rose-500"
+                      "h-2",
+                      cat.value >= 70 ? "[&>div]:bg-green-500" :
+                        cat.value >= 50 ? "[&>div]:bg-yellow-500" :
+                          "[&>div]:bg-red-500"
                     )}
                   />
                 </div>
